@@ -1,4 +1,108 @@
-syntax on
+set ts=8
+set sw=2
+set expandtab
+set colorcolumn=81
+set bg=dark
+set nu
 
-" Wrap gitcommit file types at the appropriate length
-filetype indent plugin on
+"set ruler
+set list
+
+" Disable arrows in normal mode
+nnoremap <expr> <Up> ((bufname("%") is "[Command Line]")?("\<Up>"):(""))
+nnoremap <expr> <Down> ((bufname("%") is "[Command Line]")?("\<Down>"):(""))
+nnoremap <expr> <Left> ((bufname("%") is "[Command Line]")?("\<Left>"):(""))
+nnoremap <expr> <Right> ((bufname("%") is "[Command Line]")?("\<Right>"):(""))
+set wildmode=longest,list,full
+"set wildmenu
+
+" Vim-Plug
+call plug#begin('~/.vim/plugged')
+
+" Sensible config
+Plug 'tpope/vim-sensible'
+
+" Syntax checking
+Plug 'scrooloose/syntastic'
+
+" Awesome colors
+Plug 'altercation/vim-colors-solarized'
+Plug 'Pychimp/vim-luna'
+
+" Awesome status bar
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+" Show changes wrt version control
+Plug 'mhinz/vim-signify'
+
+" Puppet highlighting
+Plug 'rodjek/vim-puppet'
+
+" LaTeX suite
+Plug 'gerw/vim-latex-suite'
+
+"" Python stuff
+" PEP 8 warnings on save
+Plug 'nvie/vim-flake8'
+" Autocompletion
+Plug 'davidhalter/jedi-vim'
+let g:jedi#use_tabs_not_buffers = 0
+
+" Jinja2 support
+Plug 'Glench/Vim-Jinja2-Syntax'
+
+" Ansible syntax highlightin
+Plug 'chase/vim-ansible-yaml'
+
+" C++ completion
+"Plug 'Valloric/YouCompleteMe'
+
+" PCGen Data file support
+Plug 'PCGen/vim-pcgen'
+
+" ALign
+Plug 'junegunn/vim-easy-align'
+call plug#end()
+
+set listchars=tab:»˙,trail:•,extends:>,precedes:<,nbsp:+
+set relativenumber
+set number
+
+" Colors and theme
+let g:airline_powerline_fonts = 1
+let g:airline_theme = 'solarized'
+let g:airline_solarized_normal_green = 1
+
+let g:solarized_term = 1
+colorscheme solarized
+
+" Darkbg in gvim
+highlight Normal guifg=white guibg=black
+
+" I like the normal bg
+highlight Normal ctermbg=none
+highlight NonText ctermbg=none
+highlight LineNr ctermbg=none
+highlight SignColumn ctermbg=none
+
+" But do show the colorcolumn
+highlight ColorColumn ctermbg=9
+
+set hls
+
+" Always show the awesome bar
+set laststatus=2
+
+" set .md files as markdown
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+" Align on leader+backslash
+au FileType markdown vmap <Leader><Bslash> :EasyAlign*<Bar><Enter>
+
+" Options for syntax checking
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_enable_signs=1
+let g:syntastic_auto_loc_list=1
+let g:syntastic_quiet_messages = {'level': 'warnings'}
