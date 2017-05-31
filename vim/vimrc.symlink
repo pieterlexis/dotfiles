@@ -28,6 +28,8 @@ Plug 'scrooloose/syntastic'
 " Awesome colors
 Plug 'altercation/vim-colors-solarized'
 Plug 'Pychimp/vim-luna'
+Plug 'grod/grod-vim-colors'
+Plug 'chriskempson/base16-vim'
 
 " Awesome status bar
 Plug 'vim-airline/vim-airline'
@@ -61,7 +63,7 @@ Plug 'chase/vim-ansible-yaml'
 " PCGen Data file support
 Plug 'PCGen/vim-pcgen'
 
-" ALign
+" Align
 Plug 'junegunn/vim-easy-align'
 call plug#end()
 
@@ -71,20 +73,24 @@ set number
 
 " Colors and theme
 let g:airline_powerline_fonts = 1
-let g:airline_theme = 'solarized'
+let g:airline_theme = 'base16_paraiso'
 let g:airline_solarized_normal_green = 1
 
-let g:solarized_term = 1
-colorscheme solarized
+"let g:solarized_term = 1
+colorscheme base16-paraiso
 
 " Darkbg in gvim
 highlight Normal guifg=white guibg=black
 
 " I like the normal bg
-highlight Normal ctermbg=none
-highlight NonText ctermbg=none
-highlight LineNr ctermbg=none
-highlight SignColumn ctermbg=none
+highlight Normal ctermbg=00
+highlight NonText ctermbg=00
+highlight LineNr ctermbg=00
+highlight SignColumn ctermbg=00
+highlight CursorLineNr ctermbg=00
+highlight SignifySignAdd ctermbg=00
+highlight SignifySignDelete ctermbg=00
+highlight SignifySignChange ctermbg=00
 
 " But do show the colorcolumn
 highlight ColorColumn ctermbg=9
