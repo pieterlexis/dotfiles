@@ -55,8 +55,6 @@ plugins=(ansible archlinux git gitignore docker virtualenv python pass mosh colo
 
 source $ZSH/oh-my-zsh.sh
 
-[ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
-
 # Rehash the completion database on every command
 zstyle ':completion:*' rehash true
 
@@ -69,8 +67,16 @@ zstyle -e :urlglobber url-other-schema '[[ $words[1] == scp || $words[1] == rsyn
 
 # Ensure gpgagent uses the right TTY
 echo UPDATESTARTUPTTY | gpg-connect-agent 2>&1 >/dev/null
+[ -f /usr/share/virtualenvwrapper/virtualenvwrapper.sh ] && source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
+[ -f /usr/bin/virtualenvwrapper.sh ] && source /usr/bin/virtualenvwrapper.sh
 
-# added by travis gem
+# Use gpg-agent for SSH authentication
+[ -r /run/user/$(id -u)/gnupg/S.gpg-agent.ssh ] && export SSH_AUTH_SOCK=/run/user/$(id -u)/gnupg/S.gpg-agent.ssh
+
+# Make sure less can read binary files
+[ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
+
+# Allow the use of travis
 [ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
 
 export EDITOR=vim
