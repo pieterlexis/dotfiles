@@ -86,8 +86,11 @@ alias vi=vim
 alias pdns-configure-auth="./configure --with-modules='bind gsqlite3 gmysql pipe' --without-dynmodules --enable-unit-tests --enable-tools"
 alias pdns-configure-recursor="./configure --enable-unit-tests"
 alias pdns-configure-dnsdist="./configure --enable-unit-tests"
-alias pdns-ansible-playbook="ansible-playbook -e \"ansible_sudo_pass=\\\"{{ lookup('pipe', 'pass PowerDNS/sudo') }}\\\"\""
+alias pdns-ansible-playbook="ansible-playbook -u pieter -e \"ansible_sudo_pass=\\\"{{ lookup('pipe', 'pass PowerDNS/sudo') }}\\\"\""
 
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=05:quote=05'
 export PATH="/usr/lib/ccache/bin:$PATH"
 export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
+
+export GOPATH=$HOME/src/go
+export PATH=$PATH:$GOPATH/bin
