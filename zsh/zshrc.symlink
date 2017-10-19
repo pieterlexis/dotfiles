@@ -104,10 +104,11 @@ gen_ansible_pw () {
 }
 
 
-alias pdns-configure-auth="./configure --with-modules='bind gsqlite3 gmysql pipe' --without-dynmodules --enable-unit-tests --enable-tools"
-alias pdns-configure-recursor="./configure --enable-unit-tests"
-alias pdns-configure-dnsdist="./configure --enable-unit-tests"
-alias pdns-ansible-playbook="ansible-playbook -u pieter -e \"ansible_sudo_pass=\\\"{{ lookup('pipe', 'pass PowerDNS/sudo') }}\\\"\""
+alias pdns-configure-auth="./configure --with-modules='bind gsqlite3 gmysql pipe' --without-dynmodules --enable-unit-tests --enable-tools --enable-libsodium"
+alias pdns-configure-recursor="./configure --enable-unit-tests --enable-libsodium"
+alias pdns-configure-dnsdist="./configure --enable-libsodium --enable-dnscrypt --enable-unit-tests"
+
+alias pdns-ansible-playbook="ansible-playbook -f 3 -u pieter -e \"ansible_sudo_pass=\\\"{{ lookup('pipe', 'pass PowerDNS/sudo') }}\\\"\""
 alias pdns-ansible="ansible -u pieter -e \"ansible_sudo_pass=\\\"{{ lookup('pipe', 'pass PowerDNS/sudo') }}\\\"\""
 
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=05:quote=05'
