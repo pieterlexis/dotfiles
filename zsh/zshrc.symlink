@@ -87,16 +87,22 @@ if [ -d /usr/share/fzf ]; then
     export FZF_DEFAULT_COMMAND='ag --nocolor -g ""'
     export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
     export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
-    export FZF_DEFAULT_OPTS='
-      --color fg:242,bg:236,hl:65,fg+:15,bg+:239,hl+:108
-      --color info:108,prompt:109,spinner:108,pointer:168,marker:168
-    '
   fi
 fi
 
 export EDITOR=vim
 export VISUAL=$EDITOR
 alias vi=vim
+
+gen_ansible_pw () {
+  local vault_opts=""
+  if [ ! -z "$2" ]
+  then
+    vault_opts="--stdin-name=$2"
+  fi
+  pwgen -sy "$1" 1 | ansible-vault encrypt_string $vault_opts
+}
+
 
 alias pdns-configure-auth="./configure --with-modules='bind gsqlite3 gmysql pipe' --without-dynmodules --enable-unit-tests --enable-tools"
 alias pdns-configure-recursor="./configure --enable-unit-tests"

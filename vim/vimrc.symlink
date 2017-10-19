@@ -17,6 +17,7 @@ Plug 'airblade/vim-gitgutter'
 
 " GIT plugin
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
 
 " Fuzzy finding
 Plug 'junegunn/fzf.vim'
@@ -41,11 +42,14 @@ Plug 'PCGen/vim-pcgen'
 
 call plug#end()
 
+set listchars=tab:»˙,trail:•,extends:>,precedes:<,nbsp:+
+set relativenumber
+set number
 set ts=8
 set sw=2
 set expandtab
 set colorcolumn=81
-"set list
+set list
 set hls
 
 " for any plugins that use this, make their keymappings use comma
@@ -74,18 +78,40 @@ let g:gitgutter_sign_modified = '∙'
 let g:gitgutter_sign_removed = '∙'
 let g:gitgutter_sign_modified_removed = '∙'
 
-set listchars=tab:»˙,trail:•,extends:>,precedes:<,nbsp:+
-set relativenumber
-set number
-
 " Colors and shit yo!
 set termguicolors
 let g:solarized_termcolors=256
 colorscheme solarized8_dark_flat
 
+set noshowmode
+
 let g:lightline = {
-      \ 'colorscheme': 'solarized',
-      \ }
+  \ 'colorscheme': 'solarized',
+  \ 'active': {
+  \   'left': [ [ 'mode', 'paste' ],
+  \             ['gitbranch'],
+  \             [ 'filename', 'modified' ]
+  \           ],
+  \   'right': [['lineinfo'],
+  \             ['percent'],
+  \             ['readonly', 'fileformat', 'fileencoding', 'filetype'],
+  \             ['linter_warnings', 'linter_errors', 'linter_ok'],
+  \             ]
+  \ },
+  \ 'component_function': {
+  \   'gitbranch': 'fugitive#head'
+  \ },
+  \ 'component_expand': {
+  \   'linter_warnings': 'LightlineLinterWarnings',
+  \   'linter_errors': 'LightlineLinterErrors',
+  \   'linter_ok': 'LightlineLinterOK'
+  \ },
+  \ 'component_type': {
+  \   'readonly': 'error',
+  \   'linter_warnings': 'warning',
+  \   'linter_errors': 'error'
+  \ }
+\ }
 
 function! LightlineLinterWarnings() abort
   let l:counts = ale#statusline#Count(bufnr(''))
@@ -116,9 +142,6 @@ function! s:MaybeUpdateLightline()
     call lightline#update()
   end
 endfunction
-
-" But do show the colorcolumn
-"highlight ColorColumn ctermbg=9
 
 " files in playbooks/ are ansible
 au BufRead,BufNewFile */playbooks/*.yml set filetype=ansible
