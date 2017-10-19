@@ -79,6 +79,21 @@ echo UPDATESTARTUPTTY | gpg-connect-agent 2>&1 >/dev/null
 # Allow the use of travis
 [ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
 
+# Use fzf to find files quickly
+if [ -d /usr/share/fzf ]; then
+  source /usr/share/fzf/key-bindings.zsh
+  source /usr/share/fzf/completion.zsh
+  if [ -x /usr/bin/ag ]; then
+    export FZF_DEFAULT_COMMAND='ag --nocolor -g ""'
+    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+    export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
+    export FZF_DEFAULT_OPTS='
+      --color fg:242,bg:236,hl:65,fg+:15,bg+:239,hl+:108
+      --color info:108,prompt:109,spinner:108,pointer:168,marker:168
+    '
+  fi
+fi
+
 export EDITOR=vim
 export VISUAL=$EDITOR
 alias vi=vim
@@ -87,10 +102,12 @@ alias pdns-configure-auth="./configure --with-modules='bind gsqlite3 gmysql pipe
 alias pdns-configure-recursor="./configure --enable-unit-tests"
 alias pdns-configure-dnsdist="./configure --enable-unit-tests"
 alias pdns-ansible-playbook="ansible-playbook -u pieter -e \"ansible_sudo_pass=\\\"{{ lookup('pipe', 'pass PowerDNS/sudo') }}\\\"\""
+alias pdns-ansible="ansible -u pieter -e \"ansible_sudo_pass=\\\"{{ lookup('pipe', 'pass PowerDNS/sudo') }}\\\"\""
 
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=05:quote=05'
 export PATH="/usr/lib/ccache/bin:$PATH"
 export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
 
 export GOPATH=$HOME/src/go
-export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$GOPATH/bin:$HOME/.node_modules/bin
+export npm_config_prefix=$HOME/.node_modules
