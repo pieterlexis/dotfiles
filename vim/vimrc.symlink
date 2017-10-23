@@ -40,6 +40,9 @@ Plug 'lifepillar/vim-solarized8'
 " PCGen Data file support
 Plug 'PCGen/vim-pcgen'
 
+" A tree-style browser
+Plug 'scrooloose/nerdtree'
+
 call plug#end()
 
 set listchars=tab:»˙,trail:•,extends:>,precedes:<,nbsp:+
@@ -62,13 +65,18 @@ let g:ackprg = 'ag --vimgrep'
 cnoreabbrev Ack Ack!
 nnoremap <Leader>a :Ack!<Space>
 
+" Some maps
 nmap ; :Buffers<CR>
+
+" Map ',' plus t or r to ack for files and tags
 nmap <Leader>t :Files<CR>
 nmap <Leader>r :Tags<CR>
 
 " ALE
 let g:ale_sign_warning = '▲'
 let g:ale_sign_error = '✗'
+"let g:ale_cpp_clangcheck_options = '-extra-arg="-std=c++11"'
+let g:ale_cpp_clangtidy_options = '-std=c++11'
 highlight link ALEWarningSign String
 highlight link ALEErrorSign Title
 
@@ -77,6 +85,17 @@ let g:gitgutter_sign_added = '∙'
 let g:gitgutter_sign_modified = '∙'
 let g:gitgutter_sign_removed = '∙'
 let g:gitgutter_sign_modified_removed = '∙'
+
+" NERDTree
+autocmd StdinReadPre * let s:std_in=1
+" Automatically open when no files are specified
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" Open when a directory is added
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+" Open the NERDTree with CTRL+n
+map <C-n> :NERDTreeToggle<CR>
+" Close vim when the only thing left is NERDTree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " Colors and shit yo!
 set termguicolors
