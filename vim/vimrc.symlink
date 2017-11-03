@@ -107,8 +107,8 @@ set noshowmode
 let g:lightline = {
   \ 'colorscheme': 'solarized',
   \ 'active': {
-  \   'left': [ [ 'mode', 'paste' ],
-  \             ['gitbranch'],
+  \   'left': [ ['mode', 'paste'],
+  \             ['fugitive'],
   \             [ 'filename', 'modified' ]
   \           ],
   \   'right': [['lineinfo'],
@@ -118,19 +118,45 @@ let g:lightline = {
   \             ]
   \ },
   \ 'component_function': {
-  \   'gitbranch': 'fugitive#head'
+  \   'fugitive': 'MyFugitive',
+  \   'filename': 'MyFilename',
+  \   'readonly': 'MyReadonly',
   \ },
   \ 'component_expand': {
   \   'linter_warnings': 'LightlineLinterWarnings',
   \   'linter_errors': 'LightlineLinterErrors',
-  \   'linter_ok': 'LightlineLinterOK'
+  \   'linter_ok': 'LightlineLinterOK',
   \ },
   \ 'component_type': {
   \   'readonly': 'error',
   \   'linter_warnings': 'warning',
   \   'linter_errors': 'error'
-  \ }
+  \ },
 \ }
+
+
+function! MyFugitive()
+  if exists("*fugitive#head")
+    let _ = fugitive#head()
+    return strlen(_) ? "\ue0a0"._ : ''
+  endif
+  return ''
+endfunction
+
+function! MyReadonly()
+  if &filetype == "help"
+    return ""
+  elseif &readonly
+    return "\ue0a2"
+  else
+    return ""
+  endif
+endfunction
+
+function! MyFilename()
+  return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
+       \ ('' != expand('%') ? expand('%') : '[NoName]')
+endfunction
 
 function! LightlineLinterWarnings() abort
   let l:counts = ale#statusline#Count(bufnr(''))
