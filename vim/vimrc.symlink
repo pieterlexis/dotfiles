@@ -22,9 +22,6 @@ Plug 'tpope/vim-rhubarb'
 " Fuzzy finding
 Plug 'junegunn/fzf.vim'
 
-" Search through files
-Plug 'mileszs/ack.vim'
-
 " Many language highlighters
 Plug 'sheerun/vim-polyglot'
 
@@ -60,17 +57,15 @@ set hls
 let mapleader = ","
 let maplocalleader = ","
 
-" ack -> ag
-let g:ackprg = 'ag --vimgrep'
-cnoreabbrev Ack Ack!
-nnoremap <Leader>a :Ack!<Space>
+" An ag command that follows symlinks
+command! -nargs=* -bang AgL call fzf#vim#ag(<q-args>, '--follow -U', <bang>0)
 
-" Some maps
+" Map ',' plus t or r to fzf for files and tags
 nmap ; :Buffers<CR>
-
-" Map ',' plus t or r to ack for files and tags
 nmap <Leader>t :Files<CR>
 nmap <Leader>r :Tags<CR>
+nmap <Leader>a :AgL<space>
+nmap <Leader>A :AgL<CR>
 
 " ALE
 let g:ale_sign_warning = '▲'
