@@ -62,3 +62,11 @@ target/
 
 #Ipython Notebook
 .ipynb_checkpoints
+
+.DS_Store
+*~
+*.swp
+.idea/
+.vscode/
+.gdb_history
+.venv
