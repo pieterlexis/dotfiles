@@ -49,3 +49,5 @@
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
+[user]
+	signingkey = 8461E50ED701C8EA
