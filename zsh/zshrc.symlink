@@ -111,9 +111,9 @@ gen_ansible_pw () {
 }
 
 
-alias pdns-configure-auth="./configure --with-modules='bind gsqlite3 gmysql pipe' --without-dynmodules --enable-unit-tests --enable-tools --enable-libsodium"
-alias pdns-configure-recursor="./configure --enable-unit-tests --enable-libsodium"
-alias pdns-configure-dnsdist="./configure --enable-libsodium --enable-dnscrypt --enable-unit-tests"
+alias pdns-configure-auth="./configure --with-modules='bind gsqlite3 gmysql pipe random' --with-luajit --without-dynmodules --enable-unit-tests --enable-tools --enable-libsodium"
+alias pdns-configure-recursor="./configure --enable-unit-tests --enable-libsodium --with-luajit"
+alias pdns-configure-dnsdist="./configure --enable-libsodium --enable-dnscrypt --with-luajit --enable-unit-tests"
 
 alias pdns-ansible-playbook="ansible-playbook -f 3 -u pieter -e \"ansible_sudo_pass=\\\"{{ lookup('pipe', 'pass PowerDNS/sudo') }}\\\"\""
 alias pdns-ansible="ansible -u pieter -e \"ansible_sudo_pass=\\\"{{ lookup('pipe', 'pass PowerDNS/sudo') }}\\\"\""
