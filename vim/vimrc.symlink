@@ -40,6 +40,9 @@ Plug 'PCGen/vim-pcgen'
 " A tree-style browser
 Plug 'scrooloose/nerdtree'
 
+" Reflow rst tables
+Plug 'nvie/vim-rst-tables'
+
 call plug#end()
 
 set listchars=tab:»˙,trail:•,extends:>,precedes:<,nbsp:+

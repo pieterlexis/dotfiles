@@ -99,6 +99,12 @@ if [ -d /usr/share/fzf ]; then
   fi
 fi
 
+# Allow creating a new termite-terminal with ctrl+shift+t
+if [[ $TERM == xterm-termite ]]; then
+  . /etc/profile.d/vte.sh
+  __vte_osc7
+fi
+
 export EDITOR=vim
 export VISUAL=$EDITOR
 alias vi=vim
