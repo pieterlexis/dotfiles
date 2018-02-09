@@ -100,7 +100,7 @@ if [ -d /usr/share/fzf ]; then
 fi
 
 # Allow creating a new termite-terminal with ctrl+shift+t
-if [[ $TERM == xterm-termite ]]; then
+if [[ $TERM == xterm-termite && -r /etc/profile.d/vte.sh ]]; then
   . /etc/profile.d/vte.sh
   __vte_osc7
 fi
