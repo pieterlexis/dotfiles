@@ -135,3 +135,5 @@ export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswi
 export GOPATH=$HOME/src/go
 export PATH=$PATH:$GOPATH/bin:$HOME/.node_modules/bin
 export npm_config_prefix=$HOME/.node_modules
+
+export PATH=$HOME/.local/bin:$PATH

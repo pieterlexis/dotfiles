@@ -70,3 +70,5 @@ target/
 .vscode/
 .gdb_history
 .venv
+
+package-lock.json
