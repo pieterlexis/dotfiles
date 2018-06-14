@@ -58,6 +58,7 @@ else
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
 Plug 'zchee/deoplete-clang'
+Plug 'zchee/deoplete-go'
 
 call plug#end()
 
@@ -131,6 +132,8 @@ let g:deoplete#enable_smart_case = 1
 let g:deoplete#sources#clang#libclang_path = "/usr/lib/libclang.so"
 let g:deoplete#sources#clang#clang_header = "/lib/clang/"
 let g:deoplete#sources#clang#std = { 'cpp': 'c++11' }
+
+let g:deoplete#sources#go#gocode_binary = "/usr/bin/gocode"
 
 " Disable the candidates in Comment/String syntaxes.
 call deoplete#custom#source('_', 'disabled_syntaxes', ['Comment', 'String'])
