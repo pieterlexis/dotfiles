@@ -121,7 +121,7 @@ gen_ansible_pw () {
 }
 
 
-alias pdns-configure-auth="./configure --with-modules='bind gsqlite3 gmysql pipe random' --with-lua=luajit --without-dynmodules --enable-unit-tests --enable-tools --enable-libsodium"
+alias pdns-configure-auth="./configure --with-modules='bind gsqlite3 gmysql pipe random' --with-lua=luajit --without-dynmodules --enable-unit-tests --enable-tools --enable-libsodium --enable-ixfrdist"
 alias pdns-configure-recursor="./configure --enable-unit-tests --enable-libsodium --with-lua=luajit"
 alias pdns-configure-dnsdist="./configure --enable-libsodium --enable-dnscrypt --with-lua=luajit --enable-unit-tests"
 
