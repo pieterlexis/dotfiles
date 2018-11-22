@@ -60,6 +60,9 @@ endif
 Plug 'zchee/deoplete-clang'
 Plug 'zchee/deoplete-go'
 
+" YANG
+Plug 'nathanalderson/yang.vim'
+
 call plug#end()
 
 set listchars=tab:»˙,trail:•,extends:>,precedes:<,nbsp:+
@@ -122,8 +125,9 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 
 " Colors and shit yo!
 set termguicolors
-let g:solarized_termcolors=256
-colorscheme solarized8_dark_flat
+set bg=dark
+" let g:solarized_termcolors=256
+colorscheme solarized8_flat
 
 " deoplete
 let g:deoplete#enable_at_startup = 1
